@@ -47,7 +47,7 @@ public class Board {
      * is solved if read from left to right, top to bottom it has numbers 1-15 in order and 
      * the empty space as the last tile.
      * @return <code>true</code> if this <code>Board</code> is in a solved state, 
-     * otherwise <code>false<code/>
+     * otherwise <code>false</code>
      */
     public boolean isSolved(){
         int expected = 1;
