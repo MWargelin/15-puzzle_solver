@@ -27,40 +27,69 @@ public class BoardTest {
     }
     
     @Test
+    public void setBoardsetsBoard() {
+        int[][] newBoard = {{15, 0, 4, 8},
+                            {3, 6, 7, 1},
+                            {2, 12, 5, 13},
+                            {9, 10, 11, 14}};
+        b.setBoard(newBoard);
+        
+        assertEquals("[15][x ][4 ][8 ]\n"
+                   + "[3 ][6 ][7 ][1 ]\n"
+                   + "[2 ][12][5 ][13]\n"
+                   + "[9 ][10][11][14]", b.toString());
+    }
+    
+    @Test
     public void toStringWorks() {
-        assertEquals(b.toString(),
-                          "[1 ][2 ][3 ][4 ]\n"
-                        + "[5 ][6 ][7 ][8 ]\n"
-                        + "[9 ][10][11][12]\n"
-                        + "[13][14][15][x ]\n");
+        assertEquals("[1 ][2 ][3 ][4 ]\n"
+                   + "[5 ][6 ][7 ][8 ]\n"
+                   + "[9 ][10][11][12]\n"
+                   + "[13][14][15][x ]", b.toString());
     }
     
     @Test
     public void movesTiles() {
         b.moveTiles("s");
-        assertEquals(b.toString(),
-                          "[1 ][2 ][3 ][4 ]\n"
-                        + "[5 ][6 ][7 ][8 ]\n"
-                        + "[9 ][10][11][x ]\n"
-                        + "[13][14][15][12]\n");
+        assertEquals("[1 ][2 ][3 ][4 ]\n"
+                   + "[5 ][6 ][7 ][8 ]\n"
+                   + "[9 ][10][11][x ]\n"
+                   + "[13][14][15][12]", b.toString());
         b.moveTiles("d");
-        assertEquals(b.toString(),
-                          "[1 ][2 ][3 ][4 ]\n"
-                        + "[5 ][6 ][7 ][8 ]\n"
-                        + "[9 ][10][x ][11]\n"
-                        + "[13][14][15][12]\n");
+        assertEquals("[1 ][2 ][3 ][4 ]\n"
+                   + "[5 ][6 ][7 ][8 ]\n"
+                   + "[9 ][10][x ][11]\n"
+                   + "[13][14][15][12]", b.toString());
         b.moveTiles("w");
-        assertEquals(b.toString(),
-                          "[1 ][2 ][3 ][4 ]\n"
-                        + "[5 ][6 ][7 ][8 ]\n"
-                        + "[9 ][10][15][11]\n"
-                        + "[13][14][x ][12]\n");
+        assertEquals("[1 ][2 ][3 ][4 ]\n"
+                   + "[5 ][6 ][7 ][8 ]\n"
+                   + "[9 ][10][15][11]\n"
+                   + "[13][14][x ][12]", b.toString());
         b.moveTiles("a");
-        assertEquals(b.toString(),
-                          "[1 ][2 ][3 ][4 ]\n"
-                        + "[5 ][6 ][7 ][8 ]\n"
-                        + "[9 ][10][15][11]\n"
-                        + "[13][14][12][x ]\n");
+        assertEquals("[1 ][2 ][3 ][4 ]\n"
+                   + "[5 ][6 ][7 ][8 ]\n"
+                   + "[9 ][10][15][11]\n"
+                   + "[13][14][12][x ]", b.toString());
+    }
+    
+    @Test
+    public void doesNotAllowInvalidMoves() {
+        assertFalse(b.moveTiles("a"));
+        assertFalse(b.moveTiles("w"));
+        
+        b.moveTiles("s");
+        b.moveTiles("s");
+        b.moveTiles("s");
+        
+        assertFalse(b.moveTiles("s"));
+        
+        b.moveTiles("d");
+        b.moveTiles("d");
+        b.moveTiles("d");
+        
+        assertFalse(b.moveTiles("d"));
+        
+        assertFalse(b.moveTiles("dsfgsdfg"));
     }
     
     @Test
@@ -78,5 +107,21 @@ public class BoardTest {
     public void ShuffleShufflesTheBoard() {
         b.Shuffle();
         assertFalse(b.isSolved());
+    }
+    
+    @Test
+    public void manhattanDistanceOfSolvedBoardIsZero() {
+        assertEquals(0, b.manhattanDistance());
+    }
+    
+    @Test
+    public void manhattanDistanceOfOneBoardIsRight() {
+        int[][] newBoard = {{15, 0, 4, 8},
+                            {3, 6, 7, 1},
+                            {2, 12, 5, 13},
+                            {9, 10, 11, 14}};
+        b.setBoard(newBoard);
+        
+        assertEquals(31, b.manhattanDistance());
     }
 }

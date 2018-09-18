@@ -3,7 +3,7 @@ package puzzle.fifteenpuzzlesolver;
 
 import java.util.Random;
 
-/**
+ /**
  * Class for the game board of the puzzle.
  * 
  * @author Matias Wargelin
@@ -42,6 +42,10 @@ public class Board {
         return N;
     }
     
+    public void setBoard(int[][] newBoard) {
+        this.board = newBoard;
+    }
+    
     /**
      * Tells if this <code>Board</code> is in a solved state. A <code>Board</code> 
      * is solved if read from left to right, top to bottom it has numbers 1-15 in order and 
@@ -78,12 +82,33 @@ public class Board {
      */
     public boolean moveTiles(String direction) {
         switch(direction){
-            case "w": if(!moveUp()) System.out.println("Can't move any tile up"); break;
-            case "a": if(!moveLeft()) System.out.println("Can't move any tile left"); break;
-            case "s": if(!moveDown()) System.out.println("Can't move any tile down"); break;
-            case "d": if(!moveRight()) System.out.println("Can't move any tile right"); break;
+            case "w":  
+                if(!moveUp()) {
+                    System.out.println("Can't move any tile up");
+                    return false;
+                } break;
+            
+            case "a":
+                if(!moveLeft()) {
+                    System.out.println("Can't move any tile left");
+                    return false;
+                } break;
+            
+            case "s":
+                if(!moveDown()) {
+                    System.out.println("Can't move any tile down");
+                    return false;
+                } break;
+                
+            case "d":
+                if(!moveRight()) {
+                    System.out.println("Can't move any tile right");
+                    return false;
+                } break;
+                
             default: System.out.println("Not a legal move"); return false;
         }
+        
         return true;
     }
     
@@ -158,6 +183,56 @@ public class Board {
         return true;
     }
     
+    /**
+     * Returns the Manhattan distance of this <code>Board</code>. Manhattan distance of 
+     * a 15-puzzle is the sum of each tile's distance from its place in a solved 
+     * state. The distance of the empty space from its position is not added in the sum.
+     * @return The Manhattan distance of this <code>Board</code>.
+     */
+    public int manhattanDistance() {
+        int manhattanDistance = 0;
+        
+        for (int k = 1; k < N*N; k++) {
+            
+            //Where tile k should be:
+            int i1 = (k-1) / N;
+            int j1 = (k-1) % N;
+            
+            //Where tile k is now:
+            int[] tilePosition = findTile(k);
+            int i2 = tilePosition[0];
+            int j2 = tilePosition[1];
+            
+            manhattanDistance += Math.abs(i1 - i2) + Math.abs(j1 - j2);
+        }
+        
+        return manhattanDistance;
+    }
+    
+    /**
+     * Gives the indexes <code>i</code> and <code>j</code> of a wanted tile on this 
+     * <code>Board</code> in an integer table of length 2. Index <code>i</code> is stored in 
+     * <code>tilePosition[0]</code> and <code>j</code> in <code>tilePosition[1]</code>
+     * @param tile - number of the wanted tile
+     * @return indexes of the tile in <code>int[]</code>. Returns <code>null</code>
+     * if there isn't such a tile on the board.
+     */
+    public int[] findTile(int tile) {
+        if(tile >= N*N) return null;
+        
+        int[] tilePosition = new int[2];
+        
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                if(board[i][j] == tile) {
+                    tilePosition[0] = i;
+                    tilePosition[1] = j;
+                }
+            }
+        }
+        
+        return tilePosition;
+    }
     
     @Override
     public String toString() {
@@ -172,7 +247,7 @@ public class Board {
                 
                 sb.append("]");
             }
-            sb.append("\n");
+            if(i != board.length - 1) sb.append("\n");
         }
         
         return sb.toString();

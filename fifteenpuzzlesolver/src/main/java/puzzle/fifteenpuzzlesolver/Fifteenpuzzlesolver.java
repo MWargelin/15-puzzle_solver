@@ -26,6 +26,7 @@ public class Fifteenpuzzlesolver {
                
         while(true) {
             System.out.println(b.toString());
+            System.out.println("");
             System.out.println("- - - - -");
             String d = s.nextLine();
             System.out.println("- - - - -");
