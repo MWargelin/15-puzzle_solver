@@ -22,7 +22,7 @@ public class Fifteenpuzzlesolver {
         System.out.println("Enter w, a, s, d to move or x to quit");
         System.out.println("");
         
-        b.Shuffle();
+        //b.Shuffle();
                
         while(true) {
             System.out.println(b.toString());

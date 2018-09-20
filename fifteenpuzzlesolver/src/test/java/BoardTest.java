@@ -124,4 +124,26 @@ public class BoardTest {
         
         assertEquals(31, b.manhattanDistance());
     }
+    
+    @Test
+    public void distanceFromSolvedTest() {
+        b.moveTiles("w");
+        b.moveTiles("d");
+        b.moveTiles("s");
+        b.moveTiles("d");
+        
+        assertEquals(6, b.distanceFromSolved());
+    }
+    
+    @Test
+    public void compareToTest() {
+        Board b2 = new Board(N);
+        int[][] newBoard = {{15, 0, 4, 8},
+                            {3, 6, 7, 1},
+                            {2, 12, 5, 13},
+                            {9, 10, 11, 14}};
+        b2.setBoard(newBoard);
+        
+        assertEquals(-31, b.compareTo(b2));
+    }
 }

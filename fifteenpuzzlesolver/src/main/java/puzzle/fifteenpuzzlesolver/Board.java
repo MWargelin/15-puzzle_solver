@@ -8,18 +8,16 @@ import java.util.Random;
  * 
  * @author Matias Wargelin
  */
-public class Board {
+public class Board implements Comparable<Board>{
     private final int N;
     private int[][] board;
-    private int emptyTileX;
-    private int emptyTileY;
+    private int movesSoFar;
     
     public Board(int n){
         this.N = n;
         this.board = new int[N][N];
+        this.movesSoFar = 0;
         initBoard();
-        this.emptyTileY = N-1;
-        this.emptyTileX = N-1;       
     }
     
     private void initBoard(){
@@ -44,6 +42,10 @@ public class Board {
     
     public void setBoard(int[][] newBoard) {
         this.board = newBoard;
+    }
+
+    public int getMovesSoFar() {
+        return movesSoFar;
     }
     
     /**
@@ -80,7 +82,7 @@ public class Board {
      * </ul>
      * @return <code>true</code> if the move is valid, otherwise <code>false</code>.
      */
-    public boolean moveTiles(String direction) {
+    public boolean moveTiles(String direction) {     
         switch(direction){
             case "w":  
                 if(!moveUp()) {
@@ -109,6 +111,7 @@ public class Board {
             default: System.out.println("Not a legal move"); return false;
         }
         
+        movesSoFar++;
         return true;
     }
     
@@ -120,6 +123,10 @@ public class Board {
         for (int i = 0; i < 100; i++) {
             int direction = r.nextInt(4);
             
+            int[] emptyTile = this.findTile(0);
+            int emptyTileY = emptyTile[0];
+            int emptyTileX = emptyTile[1];
+            
             switch(direction) {
                 case 0: moveUp(); break;
                 case 1: moveLeft(); break;
@@ -129,9 +136,14 @@ public class Board {
         }
         
         if(isSolved()) Shuffle();
+        movesSoFar = 0;
     }
     
     private boolean moveUp() {
+        int[] emptyTile = this.findTile(0);
+        int emptyTileY = emptyTile[0];
+        int emptyTileX = emptyTile[1];
+        
         if(emptyTileY >= N-1) return false;
         
         //Switch tiles
@@ -145,6 +157,10 @@ public class Board {
     }
     
     private boolean moveDown() {
+        int[] emptyTile = this.findTile(0);
+        int emptyTileY = emptyTile[0];
+        int emptyTileX = emptyTile[1];
+        
         if(emptyTileY <= 0) return false;
         
         //Switch tiles
@@ -158,6 +174,10 @@ public class Board {
     }
     
     private boolean moveLeft() {
+        int[] emptyTile = this.findTile(0);
+        int emptyTileY = emptyTile[0];
+        int emptyTileX = emptyTile[1];
+        
         if(emptyTileX >= N-1) return false;
 
         //Switch tiles
@@ -171,6 +191,10 @@ public class Board {
     }
     
     private boolean moveRight() {
+        int[] emptyTile = this.findTile(0);
+        int emptyTileY = emptyTile[0];
+        int emptyTileX = emptyTile[1];
+        
         if(emptyTileX <= 0) return false;
 
         //Switch tiles
@@ -234,6 +258,16 @@ public class Board {
         return tilePosition;
     }
     
+    public int distanceFromSolved() {
+        return movesSoFar + this.manhattanDistance();
+    }
+    
+    public Board copy() {
+        Board copy = new Board(N);
+        copy.setBoard(board);
+        return copy;
+    }
+    
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -251,5 +285,10 @@ public class Board {
         }
         
         return sb.toString();
+    }
+
+    @Override
+    public int compareTo(Board other) {
+        return this.distanceFromSolved() - other.distanceFromSolved();
     }
 }
