@@ -136,7 +136,7 @@ public class BoardTest {
     }
     
     @Test
-    public void compareToTest() {
+    public void compareToTestSmaller() {
         Board b2 = new Board(N);
         int[][] newBoard = {{15, 0, 4, 8},
                             {3, 6, 7, 1},
@@ -145,5 +145,24 @@ public class BoardTest {
         b2.setBoard(newBoard);
         
         assertEquals(-31, b.compareTo(b2));
+    }
+    
+    @Test
+    public void compareToTestGreater() {
+        Board b2 = new Board(N);
+        int[][] newBoard = {{15, 0, 4, 8},
+                            {3, 6, 7, 1},
+                            {2, 12, 5, 13},
+                            {9, 10, 11, 14}};
+        b2.setBoard(newBoard);
+        
+        assertEquals(31, b2.compareTo(b));
+    }
+    
+    @Test
+    public void compareToTestEqual() {
+        Board b2 = b.copy();
+        
+        assertEquals(0, b.compareTo(b2));
     }
 }

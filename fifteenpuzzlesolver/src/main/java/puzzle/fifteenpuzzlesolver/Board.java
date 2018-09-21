@@ -12,11 +12,13 @@ public class Board implements Comparable<Board>{
     private final int N;
     private int[][] board;
     private int movesSoFar;
+    private Board previousBoard;
     
     public Board(int n){
         this.N = n;
         this.board = new int[N][N];
         this.movesSoFar = 0;
+        previousBoard = null;
         initBoard();
     }
     
@@ -40,12 +42,30 @@ public class Board implements Comparable<Board>{
         return N;
     }
     
+    /**
+     * @param newBoard - new order of the <code>Board</code> in int[][] array
+     */
     public void setBoard(int[][] newBoard) {
         this.board = newBoard;
     }
-
+    
+    /**
+     * @return the number of moves it took to get to this state of the <code>Board</code>
+     */
     public int getMovesSoFar() {
         return movesSoFar;
+    }
+
+    public void setMovesSoFar(int movesSoFar) {
+        this.movesSoFar = movesSoFar;
+    }
+
+    public Board getPreviousBoard() {
+        return previousBoard;
+    }
+
+    public void setPreviousBoard(Board previous) {
+        this.previousBoard = previous;
     }
     
     /**
@@ -84,30 +104,10 @@ public class Board implements Comparable<Board>{
      */
     public boolean moveTiles(String direction) {     
         switch(direction){
-            case "w":  
-                if(!moveUp()) {
-                    System.out.println("Can't move any tile up");
-                    return false;
-                } break;
-            
-            case "a":
-                if(!moveLeft()) {
-                    System.out.println("Can't move any tile left");
-                    return false;
-                } break;
-            
-            case "s":
-                if(!moveDown()) {
-                    System.out.println("Can't move any tile down");
-                    return false;
-                } break;
-                
-            case "d":
-                if(!moveRight()) {
-                    System.out.println("Can't move any tile right");
-                    return false;
-                } break;
-                
+            case "w": if(!moveUp()) return false; break;           
+            case "a": if(!moveLeft()) return false; break;            
+            case "s": if(!moveDown()) return false; break;               
+            case "d": if(!moveRight()) return false; break;               
             default: System.out.println("Not a legal move"); return false;
         }
         
@@ -149,9 +149,6 @@ public class Board implements Comparable<Board>{
         //Switch tiles
         board[emptyTileY][emptyTileX] = board[emptyTileY+1][emptyTileX];
         board[emptyTileY+1][emptyTileX] = 0;
-
-        //Update the position of empty space
-        emptyTileY++;
         
         return true;
     }
@@ -166,9 +163,6 @@ public class Board implements Comparable<Board>{
         //Switch tiles
         board[emptyTileY][emptyTileX] = board[emptyTileY-1][emptyTileX];
         board[emptyTileY-1][emptyTileX] = 0;
-
-        //Update the position of empty space
-        emptyTileY--;
         
         return true;
     }
@@ -183,9 +177,6 @@ public class Board implements Comparable<Board>{
         //Switch tiles
         board[emptyTileY][emptyTileX] = board[emptyTileY][emptyTileX+1];
         board[emptyTileY][emptyTileX+1] = 0;
-
-        //Update the position of empty space
-        emptyTileX++;
         
         return true;
     }
@@ -200,9 +191,6 @@ public class Board implements Comparable<Board>{
         //Switch tiles
         board[emptyTileY][emptyTileX] = board[emptyTileY][emptyTileX-1];
         board[emptyTileY][emptyTileX-1] = 0;
-
-        //Update the position of empty space
-        emptyTileX--;
         
         return true;
     }
@@ -262,9 +250,22 @@ public class Board implements Comparable<Board>{
         return movesSoFar + this.manhattanDistance();
     }
     
+    /**
+     * Returns a new <code>Board</code> that has the same values as this one.
+     * @return a copy of this <code>Board</code>.
+     */
     public Board copy() {
         Board copy = new Board(N);
-        copy.setBoard(board);
+        
+        int[][] copyBoard = new int[N][N];
+        for (int i = 0; i < copyBoard.length; i++) {
+            for (int j = 0; j < copyBoard.length; j++) {
+                copyBoard[i][j] = board[i][j];
+            }
+        }
+
+        copy.setBoard(copyBoard);
+        copy.setMovesSoFar(movesSoFar);
         return copy;
     }
     
