@@ -19,6 +19,10 @@ public class Solver {
         this.stack = new Stack<>();
     }
     
+    /**
+     * Uses A*-star algorithm to solve given <code>Board</code>.
+     * @param board - <code>Board</code> to solve.
+     */
     public void solve(Board board) {
         while(!board.isSolved()) {
             
