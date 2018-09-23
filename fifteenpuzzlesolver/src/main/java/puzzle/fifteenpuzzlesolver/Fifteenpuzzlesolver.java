@@ -4,7 +4,7 @@ package puzzle.fifteenpuzzlesolver;
 import java.util.Scanner;
 
 /**
- *
+ * 
  * @author Matias Wargelin
  */
 public class Fifteenpuzzlesolver {
@@ -49,7 +49,7 @@ public class Fifteenpuzzlesolver {
                 }
                 default: b.moveTiles(cmd);
             }
-
+            
         }
         
         System.out.println("Thank you for playing!");

@@ -36,56 +36,43 @@ public class Board implements Comparable<Board>{
     }
     
     /**
-     * @return The length of the side of this <code>Board</code>.
+     * @return The length of the side of this {@code Board}
      */
     public int getN() {
         return N;
     }
     
     /**
-     * @param newBoard - new order of the <code>Board</code> in int[][] array
+     * @param newBoard - new order of the {@code Board} in int[][] array
      */
     public void setBoard(int[][] newBoard) {
         this.board = newBoard;
     }
     
     /**
-     * @return the number of moves it took to get to this state of the <code>Board</code>
+     * @return the number of moves it took to get to this state of the {@code Board}
      */
     public int getMovesSoFar() {
         return movesSoFar;
     }
-
-    public void setMovesSoFar(int movesSoFar) {
+    
+    private void setMovesSoFar(int movesSoFar) {
         this.movesSoFar = movesSoFar;
     }
-
+    
+    /**
+     * @return the state this {@code Board} was in before the last move
+     */
     public Board getPreviousBoard() {
         return previousBoard;
     }
 
+    /**
+     * Sets a previous state for this {@code Board} before its last move.
+     * @param previous the previous state
+     */
     public void setPreviousBoard(Board previous) {
         this.previousBoard = previous;
-    }
-    
-    /**
-     * Tells if this <code>Board</code> is in a solved state. A <code>Board</code> 
-     * is solved if read from left to right, top to bottom it has numbers 1-15 in order and 
-     * the empty space as the last tile.
-     * @return <code>true</code> if this <code>Board</code> is in a solved state, 
-     * otherwise <code>false</code>
-     */
-    public boolean isSolved(){
-        int expected = 1;
-        
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board.length; j++) {
-                if(board[i][j] == 0 && expected == N * N) break;
-                if(board[i][j] != expected)return false;
-                expected++;
-            }
-        }
-        return true;
     }
     
     /**
@@ -113,30 +100,6 @@ public class Board implements Comparable<Board>{
         
         movesSoFar++;
         return true;
-    }
-    
-    /**
-     * Shuffles the board with 100 random-generated moves.
-     */
-    public void Shuffle() {
-        Random r = new Random();
-        for (int i = 0; i < 100; i++) {
-            int direction = r.nextInt(4);
-            
-            int[] emptyTile = this.findTile(0);
-            int emptyTileY = emptyTile[0];
-            int emptyTileX = emptyTile[1];
-            
-            switch(direction) {
-                case 0: moveUp(); break;
-                case 1: moveLeft(); break;
-                case 2: moveDown(); break;
-                case 3: moveRight(); break;
-            }
-        }
-        
-        if(isSolved()) Shuffle();
-        movesSoFar = 0;
     }
     
     private boolean moveUp() {
@@ -194,12 +157,56 @@ public class Board implements Comparable<Board>{
         
         return true;
     }
+   
+    /**
+     * Tells if this {@code Board} is in a solved state. A {@code Board} 
+     * is solved if read from left to right, top to bottom it has numbers 1-15 in order and 
+     * the empty space as the last tile.
+     * @return {@code true} if this {@code Board} is in a solved state, 
+     * otherwise {@code false}
+     */
+    public boolean isSolved(){
+        int expected = 1;
+        
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                if(board[i][j] == 0 && expected == N * N) break;
+                if(board[i][j] != expected)return false;
+                expected++;
+            }
+        }
+        return true;
+    }
     
     /**
-     * Returns the Manhattan distance of this <code>Board</code>. Manhattan distance of 
+     * Shuffles the board with 100 random-generated moves.
+     */
+    public void Shuffle() {
+        Random r = new Random();
+        for (int i = 0; i < 100; i++) {
+            int direction = r.nextInt(4);
+            
+            int[] emptyTile = this.findTile(0);
+            int emptyTileY = emptyTile[0];
+            int emptyTileX = emptyTile[1];
+            
+            switch(direction) {
+                case 0: moveUp(); break;
+                case 1: moveLeft(); break;
+                case 2: moveDown(); break;
+                case 3: moveRight(); break;
+            }
+        }
+        
+        if(isSolved()) Shuffle();
+        movesSoFar = 0;
+    }
+    
+    /**
+     * The Manhattan distance of this {@code Board}. Manhattan distance of 
      * a 15-puzzle is the sum of each tile's distance from its place in a solved 
      * state. The distance of the empty space from its position is not added in the sum.
-     * @return The Manhattan distance of this <code>Board</code>.
+     * @return The Manhattan distance of this {@code Board}
      */
     public int manhattanDistance() {
         int manhattanDistance = 0;
@@ -222,11 +229,11 @@ public class Board implements Comparable<Board>{
     }
     
     /**
-     * Gives the indexes <code>i</code> and <code>j</code> of a wanted tile on this 
-     * <code>Board</code> in an integer table of length 2. Index <code>i</code> is stored in 
-     * <code>tilePosition[0]</code> and <code>j</code> in <code>tilePosition[1]</code>
-     * @param tile - number of the wanted tile
-     * @return indexes of the tile in <code>int[]</code>. Returns <code>null</code>
+     * Gives the indexes {@code i} and {@code j} of a wanted tile on this 
+     * {@code Board} in an integer table of length 2. Index {@code i} is stored in 
+     * {@code tilePosition[0]} and {@code j} in {@code tilePosition[1]}
+     * @param tile number of the wanted tile
+     * @return indexes of the tile in {@code int[]}. Returns {@code null}
      * if there isn't such a tile on the board.
      */
     public int[] findTile(int tile) {
@@ -246,13 +253,19 @@ public class Board implements Comparable<Board>{
         return tilePosition;
     }
     
+    /**
+     * Approximation of this {@code Board}'s distance from the solved 
+     * state.
+     * @return approximation of this {@code Board}'s distance from the solved 
+     * state given by the heuristic function of the A*-algorithm
+     */
     public int distanceFromSolved() {
         return movesSoFar + this.manhattanDistance();
     }
     
     /**
-     * Returns a new <code>Board</code> that has the same values as this one.
-     * @return a copy of this <code>Board</code>.
+     * Returns a new {@code Board} that has the same values as this one.
+     * @return a copy of this {@code Board}.
      */
     public Board copy() {
         Board copy = new Board(N);

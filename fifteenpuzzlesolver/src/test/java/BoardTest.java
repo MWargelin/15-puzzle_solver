@@ -41,13 +41,27 @@ public class BoardTest {
     }
     
     @Test
-    public void toStringWorks() {
-        assertEquals("[1 ][2 ][3 ][4 ]\n"
-                   + "[5 ][6 ][7 ][8 ]\n"
-                   + "[9 ][10][11][12]\n"
-                   + "[13][14][15][x ]", b.toString());
+    public void getMovesSoFarTest() {
+        b.moveTiles("d");
+        b.moveTiles("d");
+        b.moveTiles("d");
+        b.moveTiles("d"); //invalid move
+        
+        assertEquals(3, b.getMovesSoFar());
     }
     
+    @Test
+    public void setAndGetPreviousBoardTest() {
+        int[][] state = {{15, 0, 4, 8},
+                            {3, 6, 7, 1},
+                            {2, 12, 5, 13},
+                            {9, 10, 11, 14}};
+        Board newBoard = new Board(4);
+        newBoard.setBoard(state);
+        b.setPreviousBoard(newBoard);
+        assertEquals(newBoard, b.getPreviousBoard());
+    }
+
     @Test
     public void movesTiles() {
         b.moveTiles("s");
@@ -102,7 +116,7 @@ public class BoardTest {
         b.moveTiles("s");
         assertFalse(b.isSolved());
     }
-    
+
     @Test
     public void ShuffleShufflesTheBoard() {
         b.Shuffle();
@@ -123,6 +137,13 @@ public class BoardTest {
         b.setBoard(newBoard);
         
         assertEquals(31, b.manhattanDistance());
+    }
+    
+    @Test
+    public void findTileTest() {
+        int[] tile = b.findTile(3);
+        assertEquals(0, tile[0]);
+        assertEquals(2, tile[1]);
     }
     
     @Test
@@ -157,6 +178,14 @@ public class BoardTest {
         b2.setBoard(newBoard);
         
         assertEquals(31, b2.compareTo(b));
+    }
+    
+    @Test
+    public void toStringWorks() {
+        assertEquals("[1 ][2 ][3 ][4 ]\n"
+                   + "[5 ][6 ][7 ][8 ]\n"
+                   + "[9 ][10][11][12]\n"
+                   + "[13][14][15][x ]", b.toString());
     }
     
     @Test
