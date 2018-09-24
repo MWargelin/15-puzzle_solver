@@ -1,9 +1,9 @@
 
 package puzzle.fifteenpuzzlesolver;
 
+import datastructures.BoardStack;
 import java.util.PriorityQueue;
 import java.util.Queue;
-import java.util.Stack;
 
 /**
  * A Solver for {@code Board}. Uses A*-algorithm to find the optimal path 
@@ -12,11 +12,11 @@ import java.util.Stack;
  */
 public class Solver {
     private Queue<Board> minHeap;
-    private Stack<Board> stack;
+    private BoardStack stack;
     
     public Solver() {
         this.minHeap = new PriorityQueue<>();
-        this.stack = new Stack<>();
+        this.stack = new BoardStack();
     }
     
     /**
@@ -51,7 +51,7 @@ public class Solver {
         }
 
         while(board != null) {
-            stack.add(board);
+            stack.push(board);
             board = board.getPreviousBoard();
         }
 
@@ -60,7 +60,7 @@ public class Solver {
     
     private Board printSolution() {
         Board print = null;
-        while(!stack.empty()) {
+        while(!stack.isEmpty()) {
             print = stack.pop();
             System.out.println(print.toString());
             System.out.println("\n--->\n");
