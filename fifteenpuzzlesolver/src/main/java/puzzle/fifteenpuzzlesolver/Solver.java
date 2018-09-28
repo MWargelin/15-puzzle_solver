@@ -20,10 +20,10 @@ public class Solver {
     }
     
     /**
-     * Solves a {@code Board}. Solved the given {@code Board} and prints the result. 
+     * Solves a {@code Board}. Solves the given {@code Board} and prints the result. 
      * Does nothing if the given {@code Board} is already solved.
-     * @param board A {@code Board} to solve
-     * @return A new {@code Board} which is in a solved state. The solution is traceable
+     * @param board {@code Board} to solve
+     * @return New {@code Board} which is in a solved state. The solution is traceable
      * by using the {@code Board}'s getPreviousBoard-method in a loop until the 
      * previous borad is {@code null}.
      */
