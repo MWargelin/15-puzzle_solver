@@ -1,3 +1,5 @@
+Työaika: ~8h
+
 Tällä viikolla tein keon ohjelmaani varten. Se oli melko suoraviivaista eikä ongelmia niinkään ollut. Aloitin myös kirjoittamaan toteutusdokumenttia.
 
 Hyvän aikaa käytin koodikattavuusplugarin ottamisessa käyttöön. En ollut ennen tehnyt tätä itse, ja häsläämiseen upposi yllättävän paljon aikaa. Nyt kuitenkin plugari toimii. Muuten testit ovat nyt kunnossa, mutta en oikein tiedä miten testata käyttöliittymä-luokkaa, joka lähinnä printtaa lautaa eri vaiheissa. Se näyttää nyt koodikattavuusraportissa rumasti nollaa prosenttia.
