@@ -55,7 +55,7 @@ public class BoardStackTest {
     }
     
     @Test
-    public void stackOverflowIsHandled() {
+    public void expandsStackIfABoardIsPushedToFullStack() {
         for (int i = 0; i < 100; i++) {
             bs.push(new Board(4));
         }

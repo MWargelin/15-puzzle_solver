@@ -95,7 +95,7 @@ public class Board implements Comparable<Board>{
             case "a": if(!moveLeft()) return false; break;            
             case "s": if(!moveDown()) return false; break;               
             case "d": if(!moveRight()) return false; break;               
-            default: System.out.println("Not a legal move"); return false;
+            default: return false;
         }
         
         movesSoFar++;
@@ -185,11 +185,7 @@ public class Board implements Comparable<Board>{
         Random r = new Random();
         for (int i = 0; i < 100; i++) {
             int direction = r.nextInt(4);
-            
-            int[] emptyTile = this.findTile(0);
-            int emptyTileY = emptyTile[0];
-            int emptyTileX = emptyTile[1];
-            
+
             switch(direction) {
                 case 0: moveUp(); break;
                 case 1: moveLeft(); break;
@@ -260,7 +256,7 @@ public class Board implements Comparable<Board>{
      * state given by the heuristic function of the A*-algorithm
      */
     public int distanceFromSolved() {
-        return movesSoFar + this.manhattanDistance();
+        return this.movesSoFar + this.manhattanDistance();
     }
     
     /**

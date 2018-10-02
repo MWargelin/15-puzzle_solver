@@ -1,9 +1,8 @@
 
 package puzzle.fifteenpuzzlesolver;
 
+import datastructures.BoardMinHeap;
 import datastructures.BoardStack;
-import java.util.PriorityQueue;
-import java.util.Queue;
 
 /**
  * A Solver for {@code Board}. Uses A*-algorithm to find the optimal path 
@@ -11,11 +10,11 @@ import java.util.Queue;
  * @author Matias Wargelin
  */
 public class Solver {
-    private Queue<Board> minHeap;
+    private BoardMinHeap minHeap;
     private BoardStack stack;
     
     public Solver() {
-        this.minHeap = new PriorityQueue<>();
+        this.minHeap = new BoardMinHeap();
         this.stack = new BoardStack();
     }
     
@@ -44,7 +43,7 @@ public class Solver {
                     case 3: isLegalMove = copy.moveTiles("d"); break;
                 }
                 
-                if(isLegalMove) minHeap.add(copy);
+                if(isLegalMove) minHeap.insert(copy);
             }
             
             board = minHeap.poll();

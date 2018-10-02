@@ -35,15 +35,16 @@
                 <artifactId>pitest-maven</artifactId>
                 <version>1.1.8</version>
             </plugin>
+            
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.7.1.201405082137</version>
                 <configuration>
                     <excludes>
-                        <!-- Application starter -->
+                         Application starter 
                         <exclude>ac/simons/biking2/Application.class</exclude>
-                        <!-- Configuration -->
+                         Configuration 
                         <exclude>ac/simons/biking2/config/*</exclude>			
                     </excludes>
                 </configuration>
@@ -63,7 +64,7 @@
                         </goals>
                         <configuration>
                             <rules>
-                                <!--  implmentation is needed only for Maven 2  -->
+                                  implmentation is needed only for Maven 2  
                                 <rule implementation="org.jacoco.maven.RuleConfiguration">
                                     <element>BUNDLE</element>
                                     <limits>
@@ -72,7 +73,7 @@
                                             <value>COVEREDRATIO</value>
                                             <minimum>0.95</minimum>			
                                         </limit>
-                                        <!--  implmentation is needed only for Maven 2  -->
+                                          implmentation is needed only for Maven 2  
                                         <limit implementation="org.jacoco.report.check.Limit">
                                             <counter>COMPLEXITY</counter>
                                             <value>COVEREDRATIO</value>
@@ -85,6 +86,7 @@
                     </execution>
                 </executions>
             </plugin>
+            
         </plugins>
     </build>
 </project>
