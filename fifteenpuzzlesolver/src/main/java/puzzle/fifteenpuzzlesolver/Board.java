@@ -43,6 +43,13 @@ public class Board implements Comparable<Board>{
     }
     
     /**
+     * @return the state of this {@code Board}, i.e. the order of the tiles on the board
+     */
+    public int[][] getBoard() {
+        return this.board;
+    }
+    
+    /**
      * @param newBoard - new order of the {@code Board} in int[][] array
      */
     public void setBoard(int[][] newBoard) {
@@ -348,6 +355,22 @@ public class Board implements Comparable<Board>{
         copy.setBoard(copyBoard);
         copy.setMovesSoFar(movesSoFar);
         return copy;
+    }
+    
+    /**
+     * Tells if the given state matches the state of this {@code Board}
+     * @param state the state to compare with this {@code Board}'s state
+     * @return {@code true} if parameter {@code state} has all the same numbers
+     * in the same order as this {@code Board}, otherwise {@code false}
+     */
+    public boolean matchesState(int[][] state) {       
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                if(board[i][j] != state[i][j]) return false;
+                
+            }
+        }
+        return true;
     }
     
     @Override

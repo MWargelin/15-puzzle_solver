@@ -24,7 +24,7 @@ public class Solver {
      * @param board {@code Board} to solve
      * @return New {@code Board} which is in a solved state. The solution is traceable
      * by using the {@code Board}'s getPreviousBoard-method in a loop until the 
-     * previous borad is {@code null}.
+     * previous board is {@code null}.
      */
     public Board solve(Board board) {
         if(board.isSolved()) return board;
@@ -34,6 +34,7 @@ public class Solver {
             for (int i = 0; i < 4; i++) {
                 Board copy = board.copy();
                 copy.setPreviousBoard(board);
+                int[][] previousState = copy.getPreviousBoard().getBoard();
                 boolean isLegalMove = false;
 
                 switch(i) {
@@ -43,7 +44,7 @@ public class Solver {
                     case 3: isLegalMove = copy.moveTiles("d"); break;
                 }
                 
-                if(isLegalMove) minHeap.insert(copy);
+                if(isLegalMove && !copy.matchesState(previousState)) minHeap.insert(copy);
             }
             
             board = minHeap.poll();

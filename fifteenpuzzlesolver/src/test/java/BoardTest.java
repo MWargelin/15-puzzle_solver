@@ -261,4 +261,24 @@ public class BoardTest {
         
         assertEquals(16, b.linearConflicts());
     }
+    
+    @Test
+    public void matchesStateTrueTest() {
+        int[][] state = {{1, 2, 3, 4},
+                         {5, 6, 7, 8},
+                         {9, 10, 11, 12},
+                         {13, 14, 15, 0}};
+        
+        assertTrue(b.matchesState(state));
+    }
+    
+    @Test
+    public void matchesStateFalseTest() {
+        int[][] state = {{1, 2, 3, 4},
+                         {5, 6, 7, 8},
+                         {9, 10, 11, 12},
+                         {13, 14, 0, 15}};
+        
+        assertFalse(b.matchesState(state));
+    }
 }
