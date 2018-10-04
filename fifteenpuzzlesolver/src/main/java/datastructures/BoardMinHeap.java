@@ -77,7 +77,6 @@ public class BoardMinHeap {
                     Board temp = heap[i];
                     heap[i] = smallest;
                     heap[smallestIndex] = temp;
-                    //heapify(smallestIndex);
                     i = smallestIndex;
                     continue;
                 }                

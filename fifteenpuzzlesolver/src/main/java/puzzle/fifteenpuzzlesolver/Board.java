@@ -225,6 +225,78 @@ public class Board implements Comparable<Board>{
     }
     
     /**
+     * Returns the number of linear conflicts on the {@code Board}. Two tiles
+     * are in a linear conflict if both of them are in their home row/column 
+     * but they are on each other's way. More precisely, tiles x and y are in a linear
+     * conflict if:
+     * <ul>
+     * <li>x and y are on same row/column AND</li>
+     * <li>the home row/column of both x and y is this row/column AND</li>
+     * <li>x is on the left side of y, even though it's supposed to be on the right side of y (rows) OR</li>
+     * <li>x is on top of y, even though it's supposed to be below of y (columns)</li>
+     * </ul>
+     * @return the number of linear conflicts on a {@code Board}
+     */
+    public int linearConflicts() {       
+        Board solvedBoard = new Board(N);
+        int conflicts = 0;
+        
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                int tile1 = board[i][j];
+                
+                //empty tile should not be tested
+                if(tile1 == 0) continue;
+                
+                //find out where the tile should be
+                int[] whereTile1ShouldBe = solvedBoard.findTile(tile1);
+                
+                //if the tile is on its home row:
+                if(i == whereTile1ShouldBe[0]) {
+
+                    //check tiles on its right side
+                    for (int k = j; k < board.length; k++) {
+                        int tile2 = board[i][k];
+                        
+                        //empty tile should not be tested
+                        if(tile1 == 0) continue;
+                        
+                        //if a tile on the right side of tile1 is on its home row,
+                        //but should be on the left side, a conflict is found.
+                        //add two conflicts, because we won't spot the conflict when 
+                        //we get to tile2 the next time as we are only checking tiles on the right
+                        int[] whereTile2ShouldBe = solvedBoard.findTile(tile2);
+                        if(i == whereTile2ShouldBe[0] && whereTile2ShouldBe[1] < whereTile1ShouldBe[1]) {
+                            conflicts += 2;
+                        }
+                    }
+                }
+                
+                //if the tile is on its home column:
+                if(j == whereTile1ShouldBe[1]) {
+                    
+                    //check tiles under it
+                    for (int k = i; k < board.length; k++) {
+                        int tile2 = board[k][j];
+                        
+                        //etc., similar idea as checking rows
+                        if(tile1 == 0) continue;
+                        
+                        int[] whereTile2ShouldBe = solvedBoard.findTile(tile2);
+                        if(j == whereTile2ShouldBe[1] && whereTile2ShouldBe[0] < whereTile1ShouldBe[0]) {
+                            conflicts += 2;
+                        }
+                    }
+                }
+                   
+            }
+            
+        }
+        
+        return conflicts;
+    }
+    
+    /**
      * Gives the indexes {@code i} and {@code j} of a wanted tile on this 
      * {@code Board} in an integer table of length 2. Index {@code i} is stored in 
      * {@code tilePosition[0]} and {@code j} in {@code tilePosition[1]}
@@ -256,7 +328,7 @@ public class Board implements Comparable<Board>{
      * state given by the heuristic function of the A*-algorithm
      */
     public int distanceFromSolved() {
-        return this.movesSoFar + this.manhattanDistance();
+        return this.movesSoFar + this.manhattanDistance() + this.linearConflicts();
     }
     
     /**

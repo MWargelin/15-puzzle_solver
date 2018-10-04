@@ -153,6 +153,24 @@ public class BoardTest {
         b.moveTiles("s");
         b.moveTiles("d");
         
+        //3 moves (one move was invalid)
+        //+ 3 tiles 1 move away from being solved = 6
+        assertEquals(6, b.distanceFromSolved());
+    }
+    
+    @Test
+    public void distanceFromSolved2Test() {
+        int[][] newBoard = {{1, 2, 3, 4},
+                            {5, 6, 7, 8},
+                            {9, 10, 11, 12},
+                            {13, 15, 14, 0}};
+        b.setBoard(newBoard);
+
+        b.moveTiles("s");
+        
+        //1 move
+        //+ 3 manhattan distance
+        //+ 2 linear conflicts = 6
         assertEquals(6, b.distanceFromSolved());
     }
     
@@ -193,5 +211,54 @@ public class BoardTest {
         Board b2 = b.copy();
         
         assertEquals(0, b.compareTo(b2));
+    }
+    
+    @Test
+    public void noLinearConlicts() {
+        assertEquals(0, b.linearConflicts());
+    }
+    
+    @Test
+    public void linearConflictOnARow() {
+        int[][] newBoard = {{1, 2, 3, 4},
+                            {5, 6, 7, 8},
+                            {9, 10, 11, 12},
+                            {13, 15, 14, 0}};
+        b.setBoard(newBoard);
+        
+        assertEquals(2, b.linearConflicts());
+    }
+    
+    @Test
+    public void linearConflictOnAColumn() {
+        int[][] newBoard = {{5, 2, 3, 4},
+                            {1, 6, 7, 8},
+                            {9, 10, 11, 12},
+                            {13, 14, 15, 0}};
+        b.setBoard(newBoard);
+        
+        assertEquals(2, b.linearConflicts());
+    }
+    
+    @Test
+    public void noLinearConflicts2() {
+        int[][] newBoard = {{15, 0, 4, 8},
+                            {3, 6, 7, 1},
+                            {2, 12, 5, 13},
+                            {9, 10, 11, 14}};
+        b.setBoard(newBoard);
+        
+        assertEquals(0, b.linearConflicts());
+    }
+    
+    @Test
+    public void manyLinearConflicts() {
+        int[][] newBoard = {{2, 1, 7, 12},
+                            {5, 6, 3, 8},
+                            {9, 10, 11, 4},
+                            {15, 14, 13, 0}};
+        b.setBoard(newBoard);
+        
+        assertEquals(16, b.linearConflicts());
     }
 }
