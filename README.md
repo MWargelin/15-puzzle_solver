@@ -6,7 +6,9 @@ A program that solves the 15-puzzle. Data structures and algorithms school proje
 * [Viikkoraportti 2](https://github.com/MWargelin/15-puzzle_solver/blob/master/dokumentaatio/viikkoraportti_2.md)
 * [Viikkoraportti 3](https://github.com/MWargelin/15-puzzle_solver/blob/master/dokumentaatio/viikkoraportti_3.md)
 * [Viikkoraportti 4](https://github.com/MWargelin/15-puzzle_solver/blob/master/dokumentaatio/viikkoraportti_4.md)
+* [Viikkoraportti 5](https://github.com/MWargelin/15-puzzle_solver/blob/master/dokumentaatio/viikkoraportti_5.md)
 
 ## Dokumentointi
 * [Määrittelydokumentti](https://github.com/MWargelin/15-puzzle_solver/blob/master/dokumentaatio/maarittelydokumentti.md)
 * [Toteutusdokumentti](https://github.com/MWargelin/15-puzzle_solver/blob/master/dokumentaatio/toteutusdokumentti.md)
+* [Testausdokumentti](https://github.com/MWargelin/15-puzzle_solver/blob/master/dokumentaatio/testausdokumentti.md)
