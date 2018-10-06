@@ -59,6 +59,7 @@ public class BoardStack {
         if(this.isEmpty()) return null;
         
         Board board = stack[top];
+        stack[top] = null;  //Eliminate obsolete reference
         top--;
         return board;
     }

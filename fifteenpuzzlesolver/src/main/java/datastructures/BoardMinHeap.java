@@ -47,13 +47,15 @@ public class BoardMinHeap {
     
     /**
      * Returns a {@code Board} from the top of the heap.
-     * @return the {@code Board} from the heap that is closest to the solved state
+     * @return the {@code Board} from the heap that is closest to the solved state. 
+     * Returns {@code null} if the heap is empty.
      */
     public Board poll() {
         if(heapSize <= 0) return null;
         
         Board min = heap[0];
         heap[0] = heap[heapSize - 1];
+        heap[heapSize - 1] = null;  //Eliminate obsolete reference
         heapSize--;
         heapify(0);
                 
