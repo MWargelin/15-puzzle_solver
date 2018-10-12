@@ -22,6 +22,10 @@ public class Board implements Comparable<Board>{
         initBoard();
     }
     
+	/**
+	 * Initializes the {@code Board} to have all the numbers in order from left to right, 
+	 * top to bottom and the empty space as the last tile.
+	 */
     private void initBoard(){
         int number = 1;
         for (int i = 0; i < N; i++) {
