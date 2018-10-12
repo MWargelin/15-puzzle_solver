@@ -25,7 +25,7 @@ public class SolverTest {
         Board b = new Board(4);
         b.moveTiles("d");
         
-        Board solved = s.solve(b);
+        Board solved = s.solve(b, false);
         
         assertTrue(solved.isSolved());
     }
@@ -35,7 +35,7 @@ public class SolverTest {
         Board b = new Board(3);
         b.Shuffle();
         
-        Board solved = s.solve(b);
+        Board solved = s.solve(b, false);
         
         assertTrue(solved.isSolved());
     }
@@ -45,8 +45,21 @@ public class SolverTest {
         Board b = new Board(4);
         b.Shuffle();
         
-        Board solved = s.solve(b);
+        Board solved = s.solve(b, false);
         
         assertTrue(solved.isSolved());
     }
+	
+	@Test
+	public void solverTimesOut() {
+		Board b = new Board(4);
+		int[][] impossibleToSolve = {{1, 2, 3, 4},
+									{5, 6, 7, 8},
+									{9, 10, 11, 12},
+									{13, 15, 14, 0}};
+		b.setBoard(impossibleToSolve);
+		
+		Board nullBoard = s.solve(b, true);
+		assertNull(nullBoard);
+	}
 }

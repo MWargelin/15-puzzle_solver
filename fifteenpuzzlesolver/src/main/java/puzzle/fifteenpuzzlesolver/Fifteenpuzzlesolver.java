@@ -43,8 +43,11 @@ public class Fifteenpuzzlesolver {
                 case "solve": {
                     System.out.println("Solve automatically...");
                     System.out.println("");
-                    solver.solve(b);
-                    goOn = false;
+                    Board solved = solver.solve(b, true);
+					if(solved == null) {
+						System.out.println("Sorry, solver timed out after 30 seconds.");
+					}
+                    b = new Board(N);
                     break;
                 }
                 default: b.moveTiles(cmd);
