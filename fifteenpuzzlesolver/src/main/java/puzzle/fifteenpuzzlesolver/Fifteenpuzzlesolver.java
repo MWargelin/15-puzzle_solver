@@ -45,7 +45,7 @@ public class Fifteenpuzzlesolver {
                     System.out.println("");
                     Board solved = solver.solve(b, true);
 					if(solved == null) {
-						System.out.println("Sorry, solver timed out after 30 seconds.");
+						System.out.println("Sorry, solver timed out after 10 seconds.");
 					}
                     b = new Board(N);
                     break;

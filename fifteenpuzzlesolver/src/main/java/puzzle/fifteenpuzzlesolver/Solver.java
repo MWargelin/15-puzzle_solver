@@ -23,7 +23,7 @@ public class Solver {
      * Does nothing if the given {@code Board} is already solved.
      * @param board {@code Board} to solve
 	 * @param timeout if {@code true}, solver times out and returns {@code null} 
-	 * if it hasn't found a solution in 30 seconds. If {@code false}, solver goes on forever.
+	 * if it hasn't found a solution in 10 seconds. If {@code false}, solver goes on forever.
      * @return New {@code Board} which is in a solved state. The solution is traceable
      * by using the {@code Board}'s getPreviousBoard-method in a loop until the 
      * previous board is {@code null}.
@@ -53,7 +53,7 @@ public class Solver {
             
             board = minHeap.poll();
 			
-			if(timeout && System.currentTimeMillis() - start > 30000) return null;
+			if(timeout && System.currentTimeMillis() - start > 10000) return null;
         }
 
         while(board != null) {
