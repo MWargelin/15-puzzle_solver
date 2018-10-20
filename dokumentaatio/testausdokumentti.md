@@ -1,7 +1,7 @@
 # Testausdokumentti
 
 ## Yksikkötestaus
-Ohjelmassa on kattavat yksikkötestit kullekkin tärkeälle luokalle. Myös käyttöliittymänä toimivan main-metodin koodikattavuus näyttää ikävästi nollaa prosenttia, koska lähinnä tulostuksia tekevän luokan testaaminen ei tuntunut kovin mielekkäältä. Muiden luokkien testikattavuus on kuitenkin 100%.
+Ohjelmassa on kattavat yksikkötestit kullekkin luokalle. Testit on tehnty JUnitilla, ja on helposti toistettavissa. Myös käyttöliittymänä toimivan main-metodin koodikattavuus näyttää tosin ikävästi nollaa prosenttia, koska lähinnä tulostuksia tekevän luokan testaaminen ei tuntunut kovin mielekkäältä. Muiden luokkien testikattavuus on kuitenkin 100%. Koodikattavuutta ohjelmaseuraa jacoco-pluginilla.
 
 ![code coverage](https://github.com/MWargelin/15-puzzle_solver/blob/master/dokumentaatio/pictures/coverage.png "code coverage")
 
@@ -9,6 +9,8 @@ Ohjelmassa on kattavat yksikkötestit kullekkin tärkeälle luokalle. Myös käy
 Ohjelman suorituskyky ei valitettavasti ole aivan halutulla tasolla, tosin ei aivan kamalakaan. Tämä tosin oli tiedossa jo projektia aloittaessani, sillä optimaalisen ratkaisun löytäminen 15-pelille on NP-täydellinen ongelma.
 
 Suorituskykytestissä ratkaistiin 100 pelilautaa ja mitattiin kuhunkin ratkaisuun kulunut aika. 8-pelin, eli pelin muunnelman, jossa laudan sivu on kolmen mittainen, algoritmi ratkaisee melko kivuttomasti. Keskimäärin aikaa kuluu 207,56 millisekuntia. Myös 15-peli ratkeaa toisinaan hyvinkin nopeasti, mutta tietyillä erityisen vaikeilla laudan tiloilla ratkaisu odotuttaa itseään kiusallisen pitkään.
+
+Suorituskykytestikin on toteutettu JUnitilla, joten se on helposti toistettavissa.
 
 ![8-pelin suorituskyky](https://github.com/MWargelin/15-puzzle_solver/blob/master/dokumentaatio/pictures/8-peli%20suorituskyky.png "8-pelin suorituskyky")
 * ratkaistu: 100/100

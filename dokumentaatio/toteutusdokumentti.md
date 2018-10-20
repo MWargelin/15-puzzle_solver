@@ -14,5 +14,4 @@ Luokat BoardMinHeap ja BoardStack ovat itse toteutetut minimikeko ja pino.
 15-pelin optimaalisen ratkaisun löytäminen on NP-täydellinen ongelma, joten kovin nopeaa ratkaisua sille ei ole olemassakaan. [...]
 
 ## Puutteet ja parannusehdotukset
-
-## Lähteet
+Algoritmi jäi lopulta hivenen liian tehottomaksi. Vaikka lauta usein ratkeaakin, toisinaan ratkaisu odotuttaa itseään liian pitkään. Vähiten siirtoja vaativaa optimaalista ratkaisua järkevämpää olisi saattanut olla tehdä algoritmi, joka löytää yhden minkä tahansa ratkaisun. Tällainen algoritmi on mahdollista tehdä paljon nopeammin.
