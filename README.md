@@ -13,3 +13,4 @@ A program that solves the 15-puzzle. Data structures and algorithms school proje
 * [Määrittelydokumentti](https://github.com/MWargelin/15-puzzle_solver/blob/master/dokumentaatio/maarittelydokumentti.md)
 * [Toteutusdokumentti](https://github.com/MWargelin/15-puzzle_solver/blob/master/dokumentaatio/toteutusdokumentti.md)
 * [Testausdokumentti](https://github.com/MWargelin/15-puzzle_solver/blob/master/dokumentaatio/testausdokumentti.md)
+* [Käyttöohje](https://github.com/MWargelin/15-puzzle_solver/blob/master/dokumentaatio/k%C3%A4ytt%C3%B6ohje.md)
