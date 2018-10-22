@@ -13,7 +13,10 @@ public class Solver {
     private BoardMinHeap minHeap;
     private BoardStack stack;
     
-    public Solver() {
+	/**
+	 * Solver for {@code Board}.
+	 */
+	public Solver() {
         this.minHeap = new BoardMinHeap();
         this.stack = new BoardStack();
     }

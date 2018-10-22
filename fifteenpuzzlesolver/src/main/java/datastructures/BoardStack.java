@@ -10,7 +10,10 @@ import puzzle.fifteenpuzzlesolver.Board;
 public class BoardStack {
     private Board[] stack;
     private int top;
-
+	
+	/**
+	 * Stack to store {@code Board}s.
+	 */
     public BoardStack() {
         this.stack = new Board[80]; //Maximum number of moves in a solution for 15-puzzle is 80
         this.top = -1;

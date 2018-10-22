@@ -11,6 +11,9 @@ public class BoardMinHeap {
     private Board[] heap;
     private int heapSize;
     
+	/**
+	 * Minimum heap to store {@code Board}s.
+	 */
     public BoardMinHeap() {
         heap = new Board[100];
         this.heapSize = 0;
@@ -105,10 +108,13 @@ public class BoardMinHeap {
         return (i + 1) * 2 ;
     }
 
-    public int getHeapSize() {
+	public int getHeapSize() {
         return heapSize;
     }
     
+	/**
+	 * Prints out the contents of the heap.
+	 */
     public void printHeap() {
         for (int i = 0; i < heapSize; i++) {
             System.out.println(heap[i].toString());  

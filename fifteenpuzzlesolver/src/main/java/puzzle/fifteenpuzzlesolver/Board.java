@@ -14,6 +14,10 @@ public class Board implements Comparable<Board>{
     private int movesSoFar;
     private Board previousBoard;
     
+	/**
+	 * Game board of the puzzle.
+	 * @param n the length of the side of the board
+	 */
     public Board(int n){
         this.N = n;
         this.board = new int[N][N];
