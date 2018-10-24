@@ -11,7 +11,11 @@ Ratkaisija on luokassa Solver, jolle annetaan attribuuttina lauta siinä tilassa
 Luokat BoardMinHeap ja BoardStack ovat itse toteutetut minimikeko ja pino.
 
 ## Aika- ja tilavaativuus
-15-pelin optimaalisen ratkaisun löytäminen on NP-täydellinen ongelma, joten kovin nopeaa ratkaisua sille ei ole olemassakaan. [...]
+15-pelin optimaalisen ratkaisun löytäminen on NP-täydellinen ongelma. Tämäkin ratkaisu siis jäi aikavaativuudeltaan melko hitaaksi.
+
+Algoritmi käyttää A* -hakua, jonka aikavaativuus tunnetusti on O((|E| + |V|)log|V|). 15-pelin yleistetyssä versiossa (n^2)-1 -pelissä solmujen ja kaarien määrä kuitenkin kasvaa nopeasti laudan sivun pituuden n kasvaessa. Solmujen (eli mahdollisten laudan eri asentojen) lukumäärä on (n^2)! / 2. Kaaria on noin nelinkertainen määrä, sillä yleensä laudalla on mahdollista tehdä siirto neljään eri suuntaan. Kaava muuttuu siis muotoon( ( 4((n^2)! / 2) + ((n^2)! / 2) ) * log((n^2)! / 2) ) = (5((n^2)! / 2))log((n^2)! / 2) = ((n^2)!)log((n^2)!).
+
+Tilavaativuus A* -haulla on O(|V|), eli siis tämän ongelman tapauksessa O((n^2)!).
 
 ## Puutteet ja parannusehdotukset
-Algoritmi jäi lopulta hivenen liian tehottomaksi. Vaikka lauta usein ratkeaakin, toisinaan ratkaisu odotuttaa itseään liian pitkään. Vähiten siirtoja vaativaa optimaalista ratkaisua järkevämpää olisi saattanut olla tehdä algoritmi, joka löytää yhden minkä tahansa ratkaisun. Tällainen algoritmi on mahdollista tehdä paljon nopeammin.
+Algoritmi jäi lopulta hivenen liian tehottomaksi. Vaikka lauta usein ratkeaakin, toisinaan ratkaisu odotuttaa itseään liian pitkään. Vähiten siirtoja vaativaa optimaalista ratkaisua järkevämpää olisi saattanut olla tehdä algoritmi, joka löytää yhden minkä tahansa ratkaisun. Tällainen algoritmi on mahdollista tehdä paljon nopeammaksi.
